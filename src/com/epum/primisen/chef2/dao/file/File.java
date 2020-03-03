@@ -1,23 +1,15 @@
-package com.epum.primisen.chef2.utility.read_file;
-
-import com.epum.primisen.chef2.utility.read_file.FileReader;
+package com.epum.primisen.chef2.dao.file;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 
-
 //возможно FileReader джавы уже проверяет передаваемый путь на null.проверить это
-public class FileReaderLogic {
+public class File {
 
-    private FileReader fileReader;
-
-    public FileReaderLogic(FileReader fileReader) {
-        this.fileReader = fileReader;
+    private File() {
     }
 
-    public String read() {
-
-        String fileName = fileReader.getFilePath();
+    public static String read(String fileName) {
 
         StringBuilder stringBuilder = new StringBuilder();
 

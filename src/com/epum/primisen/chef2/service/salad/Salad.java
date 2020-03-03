@@ -8,16 +8,10 @@ import java.util.List;
 public class Salad {
 
     private List<Ingredient> ingredients;
-    // каллорийность (и прочее )здесь
 
     public Salad() {
         ingredients = new ArrayList<>();
     }
-
-    //сомнительный конструктор
-//    public Salad(List<Ingredient> ingredients) {
-//        this.ingredients = ingredients;
-//    }
 
     public List<Ingredient> getIngredients() {
         return ingredients;
@@ -25,5 +19,14 @@ public class Salad {
 
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        for(Ingredient ingredient : ingredients){
+            sb.append(ingredient.getName()).append(" | ");
+        }
+        return sb.toString();
     }
 }

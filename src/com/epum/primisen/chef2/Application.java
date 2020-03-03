@@ -1,28 +1,27 @@
 package com.epum.primisen.chef2;
 
-import com.epum.primisen.chef2.controller.chef.exception.ChefLogicException;
+import com.epum.primisen.chef2.controller.recipe.Recipe;
+import com.epum.primisen.chef2.controller.recipe.RecipeLogic;
+import com.epum.primisen.chef2.dao.file.File;
+import com.epum.primisen.chef2.service.ingredient.comparator.CalorieComparator;
+import com.epum.primisen.chef2.service.ingredient.comparator.FitsComparator;
 import com.epum.primisen.chef2.service.salad.Salad;
-import com.epum.primisen.chef2.service.salad.SaladLogic;
-import com.epum.primisen.chef2.controller.chef.Chef;
-import com.epum.primisen.chef2.controller.chef.ChefLogic;
-
-import java.io.IOException;
+import com.epum.primisen.chef2.service.salad.utill.IngredientSorter;
+import com.epum.primisen.chef2.view.Printer;
 
 public class Application {
 
-    public static void main(String[] args) throws ChefLogicException, IOException {
+    public static void main(String[] args) {
 
-        //проверять правильность пути к файлу
+        Recipe recipe = new Recipe(File.read("D:\\Java\\training november\\monomah.txt"));
+        RecipeLogic recipeLogic = new RecipeLogic(recipe);
 
-//        Chef chef = new Chef("D:\\Java\\training november\\monomah.txt");
-//
-//        ChefLogic chefLogic = new ChefLogic(chef);
-//
-//        Salad salad = chefLogic.cook();
+        Salad salad = new Salad();
+        salad.setIngredients(recipeLogic.readRecipe());
 
-//        SaladLogic saladLogic = new SaladLogic();
-//        System.out.println("Каллорийность салата = " + saladLogic.countCalories(salad)); //отдельный метод
-//        saladLogic.sort(salad);
-//        System.out.println("Сортировка по каллорийности = " + salad.getIngredients());
+        Printer.printSalad(salad);
+
+        IngredientSorter.sort(salad, new CalorieComparator());
+        Printer.printSalad(salad);
     }
 }

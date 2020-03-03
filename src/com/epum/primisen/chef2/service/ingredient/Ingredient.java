@@ -1,8 +1,6 @@
 package com.epum.primisen.chef2.service.ingredient;
 
-//переопределить методы Object
-//сущность ингредиент является подозрительной
-public class Ingredient implements Comparable<Ingredient> {
+public class Ingredient {
 
     private String name;
     private double weight;
@@ -10,9 +8,6 @@ public class Ingredient implements Comparable<Ingredient> {
     private double carbohydrates;
     private double fits;
     private double proteins;
-
-    public Ingredient() {
-    }
 
     public String getName() {
         return name;
@@ -62,10 +57,36 @@ public class Ingredient implements Comparable<Ingredient> {
         this.proteins = proteins;
     }
 
-    //
     @Override
-    public int compareTo(Ingredient ingredient) {
-        return this.getCalorie() - ingredient.getCalorie();
+    public int hashCode() {
+        int result = 3;
+        result += weight * 17;
+        result += calorie * 17;
+        result += carbohydrates * 17;
+        result += fits * 17;
+        result += proteins * 17;
+        result += name.hashCode() * 17;
+
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+
+        if (this == object) {
+            return true;
+        }
+        if (object == null || object.getClass() != this.getClass()) {
+            return false;
+        } else {
+            Ingredient ingredient = (Ingredient) object;
+            return this.name.equals(ingredient.getName()) &&
+                    this.weight == ingredient.weight &&
+                    this.calorie == ingredient.getCalorie() &&
+                    this.carbohydrates == ingredient.getCarbohydrates() &&
+                    this.fits == ingredient.getFits() &&
+                    this.proteins == ingredient.getProteins();
+        }
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.epum.primisen.chef2.dao;
+package com.epum.primisen.chef2.controller.recipe;
 
 import com.epum.primisen.chef2.service.ingredient.Ingredient;
 
@@ -28,6 +28,8 @@ public class RecipeLogic {
 
         int i = 0;
         while (matcher.find()) {
+
+            ingredients.add(new Ingredient());
 
             ingredients.get(i).setName(matcher.group(1));
             ingredients.get(i).setWeight(Double.parseDouble(matcher.group(2)));
